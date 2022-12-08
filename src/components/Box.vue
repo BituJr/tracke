@@ -8,12 +8,12 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: 'TemplateBox'
+  name: 'Box'
 });
 </script>
 
 <style scoped>
-    .box {
-        background: #ADD8E6;
-    }
+.box {
+  background: #FAF0CA;
+}
 </style>

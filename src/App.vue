@@ -3,75 +3,50 @@
     <div class="column is-one-quarter">
       <BarraLateral @aoAlterarModo="alterarModo"/>
     </div>
-
     <div class="column is-three-quarters conteudo">
-      <FormularioTarefa @aoSalvarTarefa="salvarTarefa" />
-      <div class="listaTarefa">
-        <ListaTarefa v-for="(listaTarefa, index) in listaTarefas" :listaTarefa="listaTarefa" :key="index"/>
-        <TemplateBox v-if="semTarefas">
-          <strong>
-            Você não está muito produtivo hoje :(
-          </strong>
-        </TemplateBox>
-      </div>
+      <Notificacoes />
+      <router-view></router-view>
     </div>
   </main>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import BarraLateral from './components/BarraLateral.vue'
-import FormularioTarefa from './components/FormularioTarefa.vue'
-import ListaTarefa from './components/ListaTarefa.vue'
-import IListaTarefa from  './interfaces/IListaTarefa'
-import TemplateBox from  './components/TemplateBox.vue'
+import { defineComponent } from "vue";
+import BarraLateral from "./components/BarraLateral.vue";
+import Notificacoes from "./components/Notificacoes.vue"
 
 export default defineComponent({
-  name: 'App',
+  name: "App",
   components: {
     BarraLateral,
-    FormularioTarefa,
-    ListaTarefa,
-    TemplateBox
+    Notificacoes
   },
   data () {
     return {
-      listaTarefas: [] as IListaTarefa[],
       modoEscuro: false
     }
   },
-  computed: {
-    semTarefas () :boolean {
-      return this.listaTarefas.length == 0
-    }
-  },
   methods: {
-    salvarTarefa (listaTarefa: IListaTarefa) {
-      this.listaTarefas.push(listaTarefa)
-    },
     alterarModo (modoEscuro: boolean) : void {
       this.modoEscuro = modoEscuro
     }
-  },
+  }
 });
 </script>
 
 <style>
-  main {
-    --bg-primario: #fff;
-    --texto-primario: #2b2d42;
-  }
-  main.modo-escuro {
-    --bg-primario: #2b2d42;
-    --texto-primario: #ddd;
-  }
-  strong {
-    color: #2b2d42;
-  }
-  .conteudo {
-    background-color: var(--bg-primario);
-  }
-  .listaTarefa {
-        padding: 1.25rem;
-    }
+main {
+  --bg-primario: #fff;
+  --texto-primario: #000;
+}
+main.modo-escuro {
+  --bg-primario: #2b2d42;
+  --texto-primario: #ddd;
+}
+.lista {
+  padding: 1.25rem;
+}
+.conteudo {
+  background-color: var(--bg-primario);
+}
 </style>
